@@ -5,5 +5,8 @@ FROM alpine:3.14.2
 # Copies the container entrypoint Bash script file from the action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 
+# Gives the execution permission to the entrypoint Bash script file
+RUN chmod +x entrypoint.sh
+
 # Determines the entrypoint Bash script file to execute when the docker container starts up
 ENTRYPOINT ["/entrypoint.sh"]

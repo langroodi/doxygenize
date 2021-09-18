@@ -4,4 +4,4 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-  - ${{ github.actor }}
+  - $GITHUB_ACTOR

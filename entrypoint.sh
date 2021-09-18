@@ -4,6 +4,9 @@
 USERNAME = $1
 USEREMAIL = "$1@users.noreply.github.com"
 
+echo $USERNAME
+echo $USEREMAIL
+
 # Install Doxygen and GIT package
 apk add doxygen git
 

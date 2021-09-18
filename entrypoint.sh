@@ -13,8 +13,10 @@ TOKEN=$2
 # Fetch the third agument (GitHub Repository)
 REPOSITORY=$3
 
-# Install Doxygen and GIT package
-apk add doxygen git
+echo $REPOSITORY
+
+# Install Doxygen, GIT, and OpenSSH packages
+apk add doxygen git openssh
 
 # Generate code documentation
 doxygen ./doc/doxygen.conf

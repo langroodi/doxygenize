@@ -1,0 +1,5 @@
+name: 'Doxygenize'
+description: 'Generate Doxygen code documentation and publish it to GitHub Pages'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

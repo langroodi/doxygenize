@@ -15,8 +15,8 @@ apk add doxygen git openssh
 doxygen $DOXYGENCONF
 
 # Set GIT global user configuration
-git config user.name github-actions
-git config user.email github-actions@github.com
+git config user.name actions
+git config user.email actions@users.noreply.github.com
 
 # Add the generated code documentation to the GIT even they are ignored
 git add --force $HTMLOUTPUT

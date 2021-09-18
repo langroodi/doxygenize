@@ -40,3 +40,6 @@ git add --all
 
 # Commit all the changed to the the GitHub Pages branch
 git commit -m "Auto commit."
+
+# Push the changes to the remote GitHub Pages branch
+git push

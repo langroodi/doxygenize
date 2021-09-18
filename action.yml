@@ -1,5 +1,8 @@
 name: 'Doxygenize'
 description: 'Generate Doxygen code documentation and publish it to GitHub Pages'
+branding:
+  icon: 'book'
+  color: 'orange'
 inputs:
   actor:
     description: 'GitHub Actor'

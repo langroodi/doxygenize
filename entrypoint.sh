@@ -1,19 +1,17 @@
 #!/bin/sh
 
 # Fetch the first argument (GitHub Actor)
-USERNAME=$1
-USEREMAIL="$1@users.noreply.github.com"
-
-echo $USERNAME
-echo $USEREMAIL
+USERNAME="action"
+echo "Global GIT user-name: $USERNAME"
+USEREMAIL="action@users.noreply.github.com"
+echo "Global GIT user-email: $USEREMAIL"
 
 # Fetch the second argument (GitHub Token) 
 TOKEN=$2
 
 # Fetch the third agument (GitHub Repository)
 REPOSITORY=$3
-
-echo $REPOSITORY
+echo "Target repository $REPOSITORY"
 
 # Install Doxygen, GIT, and OpenSSH packages
 apk add doxygen git openssh
@@ -22,8 +20,8 @@ apk add doxygen git openssh
 doxygen ./doc/doxygen.conf
 
 # Set GIT global user configuration
-#git config --global user.email "$USEREMAIL"
-#git config --global user.name "$USERNAME"
+git config --global user.email "$USEREMAIL"
+git config --global user.name "$USERNAME"
 
 # Add the generated code documentation to the GIT even they are ignored
 git add --force ./doc/html
@@ -54,7 +52,7 @@ git commit -m "Auto commit."
 
 # Set repository remote URL
 REMOTEURL=https://${USERNAME}:${TOKEN}@github.com/${REPOSITORY}.git
-#Git remote set-url $REMOTEURL
+#git remote set-url $REMOTEURL
 
 # Push the changes to the remote GitHub Pages branch
 git push

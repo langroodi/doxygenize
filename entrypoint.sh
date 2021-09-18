@@ -6,8 +6,8 @@ apk add doxygen git
 # Generate code documentation
 doxygen ./doc/doxygen.conf
 
-# Add the generated code documentation to the GIT
-git add ./doc/html
+# Add the generated code documentation to the GIT even they are ignored
+git add --force ./doc/html
 
 # Stash the generated code documentation
 git stash save ./doc/html

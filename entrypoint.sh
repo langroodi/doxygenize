@@ -31,6 +31,10 @@ git add --force ./doc/html
 # Stash the generated code documentation
 git stash save ./doc/html
 
+# Synchronize with the remote repository
+git remote update
+git fetch
+
 # Switch to the GitHub Pages branch
 git checkout gh-pages
 

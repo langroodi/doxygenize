@@ -4,19 +4,17 @@ branding:
   icon: 'book'
   color: 'orange'
 inputs:
-  actor:
-    description: 'GitHub Actor'
+  doxygenconf:
+    description: 'Doxygen configuratio file path'
     required: true
-  token:
-    description: 'GitHub Token'
+    default: './doc/doxygen.conf'
+  htmloutput:
+    description: 'Generated HTML documents output folder'
     required: true
-  repository:
-    description: 'GitHub Repository'
-    required: true
+    default: './doc/html'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-  - ${{ inputs.actor }}
-  - ${{ inputs.token }}
-  - ${{ inputs.repository }}
+  - ${{ inputs.doxygenconf }}
+  - ${{ inputs.htmloutput }}

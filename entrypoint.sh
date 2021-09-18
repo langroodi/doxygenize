@@ -22,8 +22,8 @@ apk add doxygen git openssh
 doxygen ./doc/doxygen.conf
 
 # Set GIT global user configuration
-git config --global user.email "$USEREMAIL"
-git config --global user.name "$USERNAME"
+#git config --global user.email "$USEREMAIL"
+#git config --global user.name "$USERNAME"
 
 # Add the generated code documentation to the GIT even they are ignored
 git add --force ./doc/html
@@ -33,7 +33,6 @@ git stash save ./doc/html
 
 # Synchronize with the remote repository
 git remote update
-git fetch
 
 # Switch to the GitHub Pages branch
 git checkout gh-pages
@@ -55,7 +54,7 @@ git commit -m "Auto commit."
 
 # Set repository remote URL
 REMOTEURL=https://${USERNAME}:${TOKEN}@github.com/${REPOSITORY}.git
-git remote set-url $REMOTEURL
+#Git remote set-url $REMOTEURL
 
 # Push the changes to the remote GitHub Pages branch
 git push

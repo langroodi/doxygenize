@@ -1,9 +1,9 @@
-name: 'Doxygenize'
-description: 'Generate Doxygen code documentation and publish it to GitHub Pages'
+name: "Doxygenize"
+description: "Generate Doxygen code documentation and publish it to GitHub Pages"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
-  - ${{ github.actor }}
-  - ${{ github.token }}
-  - ${{ github.repository }}
+  - "${{ github.actor }}"
+  - "${{ github.token }}"
+  - "${{ github.repository }}"

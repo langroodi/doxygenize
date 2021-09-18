@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Install Doxygen package
-apk add doxygen
+# Install Doxygen and GIT package
+apk add doxygen git
 
 # Generate code documentation
 doxygen ./doc/doxygen.conf

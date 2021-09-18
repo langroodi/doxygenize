@@ -5,3 +5,5 @@ runs:
   image: 'Dockerfile'
   args:
   - ${{ github.actor }}
+  - ${{ github.token }}
+  - ${{ github.repository }}

@@ -1,11 +1,17 @@
 #!/bin/sh
 
-# Argument $1 is GitHub Actor
+# Fetch the first argument (GitHub Actor)
 USERNAME=$1
 USEREMAIL="$1@users.noreply.github.com"
 
 echo $USERNAME
 echo $USEREMAIL
+
+# Fetch the second argument (GitHub Token) 
+TOKEN=$2
+
+# Fetch the third agument (GitHub Repository)
+REPOSITORY=$3
 
 # Install Doxygen and GIT package
 apk add doxygen git
@@ -40,6 +46,10 @@ git add --all
 
 # Commit all the changed to the the GitHub Pages branch
 git commit -m "Auto commit."
+
+# Set repository remote URL
+REMOTEURL=https://${USERNAME}:${TOKEN}@github.com/${REPOSITORY}.git
+git remote set-url $REMOTEURL
 
 # Push the changes to the remote GitHub Pages branch
 git push

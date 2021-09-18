@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -xe
 
 # Install Doxygen package
 apk add doxygen

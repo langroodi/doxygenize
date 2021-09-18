@@ -2,7 +2,7 @@
 
 # Argument $1 is GitHub Actor
 USERNAME = $1
-USEREMAIL ="$1@users.noreply.github.com"
+USEREMAIL = "$1@users.noreply.github.com"
 
 # Install Doxygen and GIT package
 apk add doxygen git
@@ -11,8 +11,8 @@ apk add doxygen git
 doxygen ./doc/doxygen.conf
 
 # Set GIT global user configuration
-git config --global user.email $USEREMAIL
-git config --global user.name $USERNAME
+git config --global user.email "$USEREMAIL"
+git config --global user.name "$USERNAME"
 
 # Add the generated code documentation to the GIT even they are ignored
 git add --force ./doc/html

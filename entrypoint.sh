@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Argument $1 is GitHub Actor
-USERNAME = $1
-USEREMAIL = "$1@users.noreply.github.com"
+USERNAME=$1
+USEREMAIL="$1@users.noreply.github.com"
 
 echo $USERNAME
 echo $USEREMAIL

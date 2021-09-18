@@ -6,4 +6,4 @@ FROM alpine:3.14.2
 COPY entrypoint.sh /entrypoint.sh
 
 # Determines the entrypoint Bash script file to execute when the docker container starts up
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]

@@ -12,17 +12,17 @@ echo "Generated HTML documents output folder $HTMLOUTPUT"
 apk add doxygen git openssh
 
 # Generate code documentation
-doxygen $DOXYGENCONF
+doxygen "$DOXYGENCONF"
 
 # Set GIT global user configuration
-git config user.name actions
-git config user.email actions@users.noreply.github.com
+git config user.name github-actions[bot]
+git config user.email github-actions[bot]@users.noreply.github.com
 
 # Add the generated code documentation to the GIT even they are ignored
-git add --force $HTMLOUTPUT
+git add --force "$HTMLOUTPUT"
 
 # Stash the generated code documentation
-git stash save $HTMLOUTPUT
+git stash save "$HTMLOUTPUT"
 
 # Synchronize with the remote repository
 git remote update
@@ -37,7 +37,7 @@ git rm -rf .
 git stash pop
 
 # Move the the generated code documentation to the branch root
-mv $HTMLOUTPUT/* .
+mv "$HTMLOUTPUT/*" .
 
 # Add all the changes to the GIT
 git add --all

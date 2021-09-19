@@ -37,7 +37,7 @@ git rm -rf .
 git stash pop
 
 # Move the the generated code documentation to the branch root
-mv "$HTMLOUTPUT/*" .
+mv "$HTMLOUTPUT"/* .
 
 # Add all the changes to the GIT
 git add --all

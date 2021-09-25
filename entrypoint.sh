@@ -44,7 +44,7 @@ GHPAGESBRANCH=$3
 
 # Try to switch to the GitHub Pages branch
 # Exit with error if the checkout failed
-git checkout gh-pages || exit 1
+git checkout "$GHPAGESBRANCH" || exit 1
 
 # Fetch the forth agument (GitHub Pages directory path)
 GHPAGESDIR=$4

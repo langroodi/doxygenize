@@ -60,7 +60,10 @@ fi
 git stash pop
 
 # Move the the generated code documentation to the GitHub Pages directory
-mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
+# if two directories are not the same.
+if [ ! "$(realpath "$GHPAGEDIR")" -ef "$(realpath "$HTMLOUPUT")" ]; then
+    mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
+fi
 
 # Add all the changes to the GIT
 git add --all

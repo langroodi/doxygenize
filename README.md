@@ -17,6 +17,7 @@ INPUT                  = # Relative path to root of your repository (e.g, ./src)
 ```
 - Enable GitHub Pages branch (i.e., gh-pages) on your repository using [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site);
 - Copy the Doxygen configuration file to root of your repository;
+- Call `action/checkoutv2` in the workflow to clone the repository;
 - Add following step to your respository workflow script:
 ```yaml
 uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.1)]

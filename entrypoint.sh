@@ -36,6 +36,9 @@ CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
 # Fetch the third argument (GitHub Pages branch name)
 GHPAGESBRANCH=$3
 
+# Fetch the forth argument (GitHub Pages directory path)
+GHPAGESDIR=$4
+
 # Stash changes in the current branch and move them to the GitHub pages branch
 if [ "$CURRENTBRANCH" != "$GHPAGESBRANCH" ]; then
     # Add the generated code documentation to the Git even they are ignored
@@ -51,8 +54,6 @@ if [ "$CURRENTBRANCH" != "$GHPAGESBRANCH" ]; then
     # Exit with error if the checkout failed
     git checkout "$GHPAGESBRANCH" || exit 1
 
-    # Fetch the forth agument (GitHub Pages directory path)
-    GHPAGESDIR=$4
     if [ -d "$GHPAGESDIR" ]; then
         # Remove all the files in GitHub Pages directory (if the directory exists)
         git rm -rf "$GHPAGESDIR"

@@ -1,24 +1,36 @@
 #!/bin/sh
 
 # Fetch the first argument (Doxygen configuratuin file path)
-DOXYGENCONF="./doc/doxygen.conf"
-echo "Doxygen confiugration file path: $DOXYGENCONF"
-
-# Fetch the second agument (Generated HTML documents output folder)
-HTMLOUTPUT=$2
-echo "Generated HTML documents output folder $HTMLOUTPUT"
+DOXYGENCONF=$1
+if [ -f "$DOXYGENCONF" ]; then
+    echo "Doxygen confiugration file path: $DOXYGENCONF"
+else
+    echo "Doxygen confiugration file cannot be found at: $DOXYGENCONF"
+    exit 1;
+fi
 
 # Install Doxygen, GIT, and OpenSSH packages
 apk add doxygen git openssh
 
-# Generate code documentation
-doxygen "$DOXYGENCONF"
+# Try to generate code documentation
+# Exit with error if the document generation failed
+doxygen "$DOXYGENCONF" || exit 1
 
-# Set GIT global user configuration
+# Fetch the second agument (Generated HTML documents output folder) and
+# strip the '/' character from the end of the directory path (if there is any)
+HTMLOUTPUT=${2%/}
+if [ -d "$HTMLOUTPUT" ]; then
+    echo "Generated HTML documents output folder: $HTMLOUTPUT"
+else
+    echo "HTML documents output folder cannot be found at: $HTMLOUTPUT"
+    exit 1;
+fi
+
+# Set Git user configuration
 git config user.name github-actions[bot]
 git config user.email github-actions[bot]@users.noreply.github.com
 
-# Add the generated code documentation to the GIT even they are ignored
+# Add the generated code documentation to the Git even they are ignored
 git add --force "$HTMLOUTPUT"
 
 # Stash the generated code documentation
@@ -27,17 +39,28 @@ git stash save "$HTMLOUTPUT"
 # Synchronize with the remote repository
 git remote update
 
-# Switch to the GitHub Pages branch
-git checkout gh-pages
+# Fetch the third argument (GitHub Pages branch name)
+GHPAGESBRANCH=$3
 
-# Remove all the file in GitHub Pages branch
-git rm -rf .
+# Try to switch to the GitHub Pages branch
+# Exit with error if the checkout failed
+git checkout gh-pages || exit 1
+
+# Fetch the forth agument (GitHub Pages directory path)
+GHPAGESDIR=$4
+if [ -d "$GHPAGESDIR" ]; then
+    # Remove all the files in GitHub Pages directory (if the directory exists)
+    git rm -rf "$GHPAGESDIR"
+else
+    # Make the GitHub Pages directory if it does not exist
+    mkdir "$GHPAGESDIR"
+fi
 
 # Pop the stashed generated code documentation
 git stash pop
 
-# Move the the generated code documentation to the branch root
-mv "$HTMLOUTPUT"/* .
+# Move the the generated code documentation to the GitHub Pages directory
+mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
 
 # Add all the changes to the GIT
 git add --all

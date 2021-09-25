@@ -7,14 +7,24 @@ inputs:
   doxygenconf:
     description: 'Doxygen configuratio file path'
     required: true
-    default: './doc/doxygen.conf'
+    default: './Doxyfile'
   htmloutput:
     description: 'Generated HTML documents output folder'
     required: true
-    default: './doc/html'
+    default: './docs/'
+  ghpagesbranch:
+    description: 'GitHub Page branch name'
+    required: true
+    default: 'gh-pages'
+  ghpagesdir:
+    description: 'GitHub Page directory path'
+    required: true
+    default: './'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
   - ${{ inputs.doxygenconf }}
   - ${{ inputs.htmloutput }}
+  - ${{ inputs.ghpagesbranch }}
+  - ${{ inputs.ghpagesdir }}

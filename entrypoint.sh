@@ -67,7 +67,7 @@ fi
 
 # Move the the generated code documentation to the GitHub Pages directory
 # if two directories are not the same.
-if [ ! "$(realpath "$GHPAGEDIR")" -ef "$(realpath "$HTMLOUPUT")" ]; then
+if [ ! "$(realpath "$GHPAGESDIR")" -ef "$(realpath "$HTMLOUTPUT")" ]; then
     mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
 fi
 

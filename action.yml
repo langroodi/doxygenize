@@ -13,11 +13,11 @@ inputs:
     required: true
     default: './docs/'
   ghpagesbranch:
-    description: 'GitHub Page branch name'
+    description: 'GitHub Pages branch name'
     required: true
     default: 'gh-pages'
   ghpagesdir:
-    description: 'GitHub Page directory path'
+    description: 'GitHub Pages directory path'
     required: true
     default: './'
 runs:

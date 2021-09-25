@@ -30,34 +30,40 @@ fi
 git config user.name github-actions[bot]
 git config user.email github-actions[bot]@users.noreply.github.com
 
-# Add the generated code documentation to the Git even they are ignored
-git add --force "$HTMLOUTPUT"
-
-# Stash the generated code documentation
-git stash save "$HTMLOUTPUT"
-
-# Synchronize with the remote repository
-git remote update
+# Get the current branch name
+CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 # Fetch the third argument (GitHub Pages branch name)
 GHPAGESBRANCH=$3
 
-# Try to switch to the GitHub Pages branch
-# Exit with error if the checkout failed
-git checkout "$GHPAGESBRANCH" || exit 1
+# Stash changes in the current branch and move them to the GitHub pages branch
+if [ "$CURRENTBRANCH" != "$GHPAGESBRANCH" ]; then
+    # Add the generated code documentation to the Git even they are ignored
+    git add --force "$HTMLOUTPUT"
 
-# Fetch the forth agument (GitHub Pages directory path)
-GHPAGESDIR=$4
-if [ -d "$GHPAGESDIR" ]; then
-    # Remove all the files in GitHub Pages directory (if the directory exists)
-    git rm -rf "$GHPAGESDIR"
-else
-    # Make the GitHub Pages directory if it does not exist
-    mkdir "$GHPAGESDIR"
+    # Stash the generated code documentation
+    git stash save "$HTMLOUTPUT"
+
+    # Synchronize with the remote repository
+    git remote update
+
+    # Try to switch to the GitHub Pages branch
+    # Exit with error if the checkout failed
+    git checkout "$GHPAGESBRANCH" || exit 1
+
+    # Fetch the forth agument (GitHub Pages directory path)
+    GHPAGESDIR=$4
+    if [ -d "$GHPAGESDIR" ]; then
+        # Remove all the files in GitHub Pages directory (if the directory exists)
+        git rm -rf "$GHPAGESDIR"
+    else
+        # Make the GitHub Pages directory if it does not exist
+        mkdir "$GHPAGESDIR"
+    fi
+
+    # Pop the stashed generated code documentation
+    git stash pop
 fi
-
-# Pop the stashed generated code documentation
-git stash pop
 
 # Move the the generated code documentation to the GitHub Pages directory
 # if two directories are not the same.

@@ -1,7 +1,12 @@
 # Specifies the container official image to run the codes
 # Same as the action itself, Alpine is also a minial Docker image (More info: https://hub.docker.com/_/alpine)
 FROM alpine:3.14.2
-
+RUN ls
+WORKDIR /graphviz
+RUN apk add --update --no-cache \
+           graphviz \
+           ttf-freefont
+WORKDIR -
 # Copies the container entrypoint Bash script file from the action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 

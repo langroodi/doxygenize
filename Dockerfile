@@ -7,6 +7,7 @@ RUN apk add --update --no-cache \
            graphviz \
            ttf-freefont
 WORKDIR -
+RUN ls
 # Copies the container entrypoint Bash script file from the action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 

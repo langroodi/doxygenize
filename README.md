@@ -9,10 +9,22 @@ This is a GitHub Action to automatically generate [Doxygen](http://doxygen.nl) c
 ```
 GENERATE_LATEX         = NO
 ```
-- Set properly the input and output directories in the Doxygen configuration file:
+- `doxygen` is called from the root directory of your repository, so any path on your `Doxyfile` should be relative to this directory and NOT relative to directory where your `Doxyfile` is located, i.e. if you have a project set up like:
 ```
-OUTPUT_DIRECTORY       = # Relative path to root of your repository (e.g, ./)
-INPUT                  = # Relative path to root of your repository (e.g, ./src)
+.
+│     
+├───src
+│   ├───sourcefile1.c
+│   └───sourcefile2.c
+├───docs
+└───doc
+    └───Doxyfile
+```
+then your `OUTPUT_DIRECTORY`, `HTML_OUTPUT` and `INPUT` variables (and any other path variable) should be set like
+```
+OUTPUT_DIRECTORY       = ./ # Relative path to root of your repository (e.g, ./)
+INPUT                  = ./src # Relative path to root of your repository (e.g, ./src)
+HTML_OUTPUT            = ./docs # Relative path to root of your repository
 ```
 - Enable GitHub Pages branch (i.e., gh-pages) on your repository using [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site);
 - Copy the Doxygen configuration file to root of your repository;
@@ -41,7 +53,7 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.3)]
 ```yaml
 uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.3)]
 with:
-    doxygenconf: '[Configuration file path (e.g., ./doc/doxygen.conf)]'
+    doxygenconf: '[Configuration file path including the file name (e.g., ./doc/doxygen.conf)]'
     htmloutput: '[HTML output folder (e.g., ./doc/html/)]'
     ghpagesbranch: '[GitHub Pages branch name'(e.g., master)]'
     ghpagesdir: '[GitHub Pages directory path (e.g., ./docs/)]'

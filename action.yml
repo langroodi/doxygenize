@@ -5,7 +5,7 @@ branding:
   color: 'orange'
 inputs:
   doxygenconf:
-    description: 'Doxygen configuratio file path'
+    description: 'Doxygen configuration file path'
     required: true
     default: './Doxyfile'
   htmloutput:

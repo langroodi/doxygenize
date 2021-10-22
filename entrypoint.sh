@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Fetch the first argument (Doxygen configuratuin file path)
+# Fetch the first argument (Doxygen configuration file path)
 DOXYGENCONF=$1
 if [ -f "$DOXYGENCONF" ]; then
     echo "Doxygen confiugration file path: $DOXYGENCONF"
@@ -26,6 +26,10 @@ else
     exit 1;
 fi
 
+# Add .nojekyll file to disable GitHub Pages Jekyll processing
+# This allows pages with leading underscores
+touch .nojekyll
+
 # Set Git user configuration
 git config user.name github-actions[bot]
 git config user.email github-actions[bot]@users.noreply.github.com
@@ -41,7 +45,7 @@ GHPAGESDIR=$4
 
 # Stash changes in the current branch and move them to the GitHub pages branch
 if [ "$CURRENTBRANCH" != "$GHPAGESBRANCH" ]; then
-    # Add the generated code documentation to the Git even they are ignored
+    # Add the generated code documentation to the Git even if they are ignored
     git add --force "$HTMLOUTPUT"
 
     # Stash the generated code documentation

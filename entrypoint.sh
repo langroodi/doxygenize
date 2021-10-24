@@ -19,7 +19,7 @@ DisableJekyll () {
 
 GetCurrentBranch () {
     # Get the current branch name
-    return "$(git rev-parse --abbrev-ref HEAD)"
+    echo "$(git rev-parse --abbrev-ref HEAD)"
 }
 
 MigrateChanges () {
@@ -92,8 +92,7 @@ DisableJekyll
 
 ConfigureGitUser
 
-GetCurrentBranch
-CURRENTBRANCH=$?
+CURRENTBRANCH=$(GetCurrentBranch)
 
 # Fetch the third argument (GitHub Pages branch name)
 GHPAGESBRANCH=$3

@@ -14,7 +14,7 @@ ConfigureGitUser () {
 DisableJekyll () {
     # Add .nojekyll file to disable GitHub Pages Jekyll processing
     # This allows pages with leading underscores
-    touch .nojekyll
+    touch "${1%/}/.nojekyll"
 }
 
 GetCurrentBranch () {
@@ -88,8 +88,6 @@ else
     exit 1
 fi
 
-DisableJekyll
-
 ConfigureGitUser
 
 CURRENTBRANCH=$(GetCurrentBranch)
@@ -111,5 +109,7 @@ fi
 if [ ! "$(realpath "$GHPAGESDIR")" -ef "$(realpath "$HTMLOUTPUT")" ]; then
     mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
 fi
+
+DisableJekyll "$GHPAGESDIR"
 
 CommitChanges

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 InstallDependencies () {
     # Install Doxygen, GIT, OpenSSH, Graphviz, and TrueType Free Font packages
@@ -40,14 +41,6 @@ MigrateChanges () {
     # Exit with error if the checkout failed
     git checkout "$DESTINATIONBRANCH" || exit 1
 
-    if [ -d "$DESTINATIONDIR" ]; then
-        # Remove all the files in GitHub Pages directory (if the directory exists)
-        git rm -rf "$DESTINATIONDIR"
-    else
-        # Make the GitHub Pages directory if it does not exist
-        mkdir "$DESTINATIONDIR"
-    fi
-
     # Pop the stashed generated code documentation
     git stash pop
 }
@@ -77,12 +70,6 @@ else
     exit 1
 fi
 
-InstallDependencies
-
-# Try to generate code documentation
-# Exit with error if the document generation failed
-doxygen "$DOXYGENCONF" || exit 1
-
 # Fetch the second agument (Generated HTML documents output folder) and
 # strip the '/' character from the end of the directory path (if there is any)
 HTMLOUTPUT=${2%/}
@@ -93,15 +80,29 @@ else
     exit 1
 fi
 
-ConfigureGitUser
-
-CURRENTBRANCH=$(GetCurrentBranch)
-
 # Fetch the third argument (GitHub Pages branch name)
 GHPAGESBRANCH=$3
 
 # Fetch the forth argument (GitHub Pages directory path)
 GHPAGESDIR=$4
+
+InstallDependencies
+
+if [ -d "$GHPAGESDIR" ]; then
+    # Remove all the files in GitHub Pages directory (if the directory exists)
+    git rm -rf "$GHPAGESDIR"
+else
+    # Make the GitHub Pages directory if it does not exist
+    mkdir -p "$GHPAGESDIR"
+fi
+
+# Try to generate code documentation
+# Exit with error if the document generation failed
+doxygen "$DOXYGENCONF" || exit 1
+
+ConfigureGitUser
+
+CURRENTBRANCH=$(GetCurrentBranch)
 
 # Stash changes in the current branch and move them to the GitHub pages branch
 # if the current branch and the determined GitHub page branch are not the same.

@@ -23,6 +23,18 @@ GetCurrentBranch () {
     echo "$(git rev-parse --abbrev-ref HEAD)"
 }
 
+PrepareGitHubPagesDirectory() {
+	DESTINATIONDIR=$1
+	
+	if [ -d "$DESTINATIONDIR" ]; then
+        # Remove all the files in GitHub Pages directory (if the directory exists)
+        git rm -rf "$DESTINATIONDIR"
+    else
+        # Create the GitHub Pages directory if it does not exist
+        mkdir -p "$DESTINATIONDIR"
+    fi
+}
+
 MigrateChanges () {
     SOURCEDIR=$1
     DESTINATIONBRANCH=$2
@@ -40,6 +52,9 @@ MigrateChanges () {
     # Try to switch to the GitHub Pages branch
     # Exit with error if the checkout failed
     git checkout "$DESTINATIONBRANCH" || exit 1
+    
+    # Prepare destination directory once again
+    PrepareGitHubPagesDirectory "$DESTINATIONDIR"
 
     # Pop the stashed generated code documentation
     git stash pop
@@ -82,13 +97,8 @@ GHPAGESDIR=$4
 
 InstallDependencies
 
-if [ -d "$GHPAGESDIR" ]; then
-    # Remove all the files in GitHub Pages directory (if the directory exists)
-    git rm -rf "$GHPAGESDIR"
-else
-    # Make the GitHub Pages directory if it does not exist
-    mkdir -p "$GHPAGESDIR"
-fi
+# Prepare destination directory
+PrepareGitHubPagesDirectory "$GHPAGESDIR"
 
 # Try to generate code documentation
 # Exit with error if the document generation failed

@@ -73,12 +73,6 @@ fi
 # Fetch the second agument (Generated HTML documents output folder) and
 # strip the '/' character from the end of the directory path (if there is any)
 HTMLOUTPUT=${2%/}
-if [ -d "$HTMLOUTPUT" ]; then
-    echo "Generated HTML documents output folder: $HTMLOUTPUT"
-else
-    echo "HTML documents output folder cannot be found at: $HTMLOUTPUT"
-    exit 1
-fi
 
 # Fetch the third argument (GitHub Pages branch name)
 GHPAGESBRANCH=$3
@@ -99,6 +93,14 @@ fi
 # Try to generate code documentation
 # Exit with error if the document generation failed
 doxygen "$DOXYGENCONF" || exit 1
+
+# Check for existence of HTML output folder
+if [ -d "$HTMLOUTPUT" ]; then
+    echo "Generated HTML documents output folder: $HTMLOUTPUT"
+else
+    echo "HTML documents output folder cannot be found at: $HTMLOUTPUT"
+    exit 1
+fi
 
 ConfigureGitUser
 

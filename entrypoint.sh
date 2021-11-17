@@ -26,13 +26,13 @@ GetCurrentBranch () {
 PrepareGitHubPagesDirectory() {
 	DESTINATIONDIR=$1
 	
+    # Remove all the files in GitHub Pages directory (if the directory exists)
 	if [ -d "$DESTINATIONDIR" ]; then
-        # Remove all the files in GitHub Pages directory (if the directory exists)
         git rm -rf "$DESTINATIONDIR"
-    else
-        # Create the GitHub Pages directory if it does not exist
-        mkdir -p "$DESTINATIONDIR"
     fi
+    
+    # Create the GitHub Pages directory if it does not exist
+    mkdir -p "$DESTINATIONDIR"
 }
 
 MigrateChanges () {
@@ -53,7 +53,7 @@ MigrateChanges () {
     # Exit with error if the checkout failed
     git checkout "$DESTINATIONBRANCH" || exit 1
     
-    # Prepare destination directory once again
+    # Prepare destination directory
     PrepareGitHubPagesDirectory "$DESTINATIONDIR"
 
     # Pop the stashed generated code documentation
@@ -97,9 +97,6 @@ GHPAGESDIR=$4
 
 InstallDependencies
 
-# Prepare destination directory
-PrepareGitHubPagesDirectory "$GHPAGESDIR"
-
 # Try to generate code documentation
 # Exit with error if the document generation failed
 doxygen "$DOXYGENCONF" || exit 1
@@ -125,6 +122,9 @@ fi
 # Move the the generated code documentation to the GitHub Pages directory
 # if two directories are not the same.
 if [ ! "$(realpath "$GHPAGESDIR")" -ef "$(realpath "$HTMLOUTPUT")" ]; then
+    # Prepare destination directory
+    PrepareGitHubPagesDirectory "$GHPAGESDIR"
+    
     mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
 fi
 

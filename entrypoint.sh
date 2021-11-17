@@ -53,11 +53,16 @@ MigrateChanges () {
 }
 
 CommitChanges () {
-    # Add all the changes to the GIT
-    git add --all
+    DESTINATIONDIR=$1
+    
+    # Unstage all changes
+    git reset
+    
+    # Add only the destination directory
+    git add --force "$DESTINATIONDIR"
     
     # Commit all the changed to the the GitHub Pages branch
-    git commit -m "Auto commit."
+    git commit -m "Auto commit"
     
     # Push the changes to the remote GitHub Pages branch
     git push
@@ -112,4 +117,4 @@ fi
 
 DisableJekyll "$GHPAGESDIR"
 
-CommitChanges
+CommitChanges "$GHPAGESDIR"

@@ -123,8 +123,8 @@ fi
 # Move the the generated code documentation to the GitHub Pages directory
 # if two directories are not the same.
 if [ ! "$(realpath "$GHPAGESDIR")" -ef "$(realpath "$HTMLOUTPUT")" ]; then
-    # Prepare destination directory
-    PrepareGitHubPagesDirectory "$GHPAGESDIR"
+    # Create the GitHub Pages directory if it does not exist
+    mkdir -p "$GHPAGESDIR"
     
     mv "$HTMLOUTPUT"/* "$GHPAGESDIR"
 fi

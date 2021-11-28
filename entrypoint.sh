@@ -1,4 +1,5 @@
 #!/bin/sh
+# Enable console output
 set -x
 
 InstallDependencies () {
@@ -24,10 +25,10 @@ GetCurrentBranch () {
 }
 
 PrepareGitHubPagesDirectory() {
-	DESTINATIONDIR=$1
+    DESTINATIONDIR=$1
 	
     # Remove all the files in GitHub Pages directory (if the directory exists)
-	if [ -d "$DESTINATIONDIR" ]; then
+    if [ -d "$DESTINATIONDIR" ]; then
         git rm -rf "$DESTINATIONDIR"
     fi
     

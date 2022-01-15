@@ -31,13 +31,13 @@ HTML_OUTPUT            = ./docs # Relative path to root of your repository
 - Call `action/checkoutv2` in the workflow to clone the repository;
 - Add following step to your respository workflow script:
 ```yaml
-uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.3)]
+uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.5)]
 ```
 - In case of different:
   - Doxygen configuration file name and/or path;
   - HTML output folder;
   - GitHub Pages branch name;
-  - GitHUb Pages home directory which contains `index.html` file
+  - GitHub Pages home directory which contains `index.html` file
   
  please refer to the [Inputs](#inputs) section.
 
@@ -51,7 +51,9 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.3)]
 | ghpagesdir | string | `./` | GitHub Pages home directory in the GitHub Pages branch |
 
 ```yaml
-uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.3)]
+# In the case of no checkout action call in the whole build script, following action should be called before executing the doxygenize action
+uses: actions/checkout@v2
+uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.5)]
 with:
     doxygenconf: '[Configuration file path including the file name (e.g., ./doc/doxygen.conf)]'
     htmloutput: '[HTML output folder (e.g., ./doc/html/)]'

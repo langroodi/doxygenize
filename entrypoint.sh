@@ -96,6 +96,9 @@ GHPAGESBRANCH=$3
 # Fetch the forth argument (GitHub Pages directory path)
 GHPAGESDIR=$4
 
+# Fetch the fifth argument (Toggle dark mode)
+DARKMODE=$5
+
 InstallDependencies
 
 # Try to generate code documentation
@@ -108,6 +111,12 @@ if [ -d "$HTMLOUTPUT" ]; then
 else
     echo "HTML documents output folder cannot be found at: $HTMLOUTPUT"
     exit 1
+fi
+
+if [$DARKMODE = true]; then
+    wget -O "$HTMLOUTPUT/doxygen.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/doxygen.css || exit 1
+    wget -O "$HTMLOUTPUT/navtree.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/navtree.css || exit 1
+    wget -O "$HTMLOUTPUT/search/search.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/search.css || exit 1
 fi
 
 ConfigureGitUser

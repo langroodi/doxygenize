@@ -20,6 +20,10 @@ inputs:
     description: 'GitHub Pages directory path'
     required: true
     default: './'
+  darkmode:
+    description: 'Toggle dark mode CSS'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -28,3 +32,4 @@ runs:
   - ${{ inputs.htmloutput }}
   - ${{ inputs.ghpagesbranch }}
   - ${{ inputs.ghpagesdir }}
+  - ${{ inputs.darkmode }}

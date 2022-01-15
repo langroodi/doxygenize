@@ -7,6 +7,27 @@ InstallDependencies () {
     apk add doxygen git openssh graphviz ttf-freefont
 }
 
+ConfigureDarkTheme () {
+    HTMLOUTPUT=$1
+    RAWCONTENTURL="https://raw.githubusercontent.com/langroodi/doxygenize"
+    CONTENTTAG="33512f53bd403d83806bb133016bb055f7953a81"
+
+    # Replace general doxygen style sheet
+    LIGHTDOGYGENCSS="$HTMLOUTPUT/doxygen.css"
+    DARKDOXYGENCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/doxygen.css"
+    wget -O LIGHTDOGYGENCSS DARKDOXYGENCSS || exit 1
+
+    # Replace general navigation tree style sheet
+    LIGHTNAVTREECSS="$HTMLOUTPUT/navtree.css"
+    DARKNAVTREECSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/navtree.css"
+    wget -O LIGHTNAVTREECSS DARKNAVTREECSS || exit 1
+
+    # Replace general search menu style sheet
+    LIGHTSEARCHCSS="$HTMLOUTPUT/search/search.css"
+    DARKSEARCHCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/search.css"
+    wget -O LIGHTSEARCHCSS DARKSEARCHCSS || exit 1
+}
+
 ConfigureGitUser () {
     # Set Git user configuration
     git config user.name github-actions[bot]
@@ -113,10 +134,10 @@ else
     exit 1
 fi
 
+# Replace dark theme style sheet CSS files
+# if dark mode is enabled as action input
 if [ $DARKMODE = true ]; then
-    wget -O "$HTMLOUTPUT/doxygen.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/doxygen.css || exit 1
-    wget -O "$HTMLOUTPUT/navtree.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/navtree.css || exit 1
-    wget -O "$HTMLOUTPUT/search/search.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/search.css || exit 1
+    ConfigureDarkTheme "$HTMLOUTPUT"
 fi
 
 ConfigureGitUser

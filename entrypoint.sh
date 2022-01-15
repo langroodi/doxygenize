@@ -15,17 +15,17 @@ ConfigureDarkTheme () {
     # Replace general doxygen style sheet
     LIGHTDOGYGENCSS="$HTMLOUTPUT/doxygen.css"
     DARKDOXYGENCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/doxygen.css"
-    wget -O LIGHTDOGYGENCSS DARKDOXYGENCSS || exit 1
+    wget -O "$LIGHTDOGYGENCSS" "$DARKDOXYGENCSS" || exit 1
 
     # Replace general navigation tree style sheet
     LIGHTNAVTREECSS="$HTMLOUTPUT/navtree.css"
     DARKNAVTREECSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/navtree.css"
-    wget -O LIGHTNAVTREECSS DARKNAVTREECSS || exit 1
+    wget -O "$LIGHTNAVTREECSS" "$DARKNAVTREECSS" || exit 1
 
     # Replace general search menu style sheet
     LIGHTSEARCHCSS="$HTMLOUTPUT/search/search.css"
     DARKSEARCHCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/search.css"
-    wget -O LIGHTSEARCHCSS DARKSEARCHCSS || exit 1
+    wget -O "$LIGHTSEARCHCSS" "$DARKSEARCHCSS" || exit 1
 }
 
 ConfigureGitUser () {

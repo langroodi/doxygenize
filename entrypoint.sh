@@ -113,7 +113,7 @@ else
     exit 1
 fi
 
-if [$DARKMODE = true]; then
+if [ $DARKMODE = true ]; then
     wget -O "$HTMLOUTPUT/doxygen.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/doxygen.css || exit 1
     wget -O "$HTMLOUTPUT/navtree.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/navtree.css || exit 1
     wget -O "$HTMLOUTPUT/search/search.css"  https://raw.githubusercontent.com/langroodi/doxygenize/33512f53bd403d83806bb133016bb055f7953a81/stylesheet/search.css || exit 1

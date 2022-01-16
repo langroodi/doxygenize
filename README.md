@@ -31,13 +31,14 @@ HTML_OUTPUT            = ./docs # Relative path to root of your repository
 - Call `action/checkoutv2` in the workflow to clone the repository;
 - Add following step to your respository workflow script:
 ```yaml
-uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.5)]
+uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.6)]
 ```
 - In case of different:
   - Doxygen configuration file name and/or path;
   - HTML output folder;
   - GitHub Pages branch name;
-  - GitHub Pages home directory which contains `index.html` file
+  - GitHub Pages home directory which contains `index.html` file;
+  - Using Doxygen Dark Mode (partially tested on Mozilla 96.0 (64-bit) for Ubuntu)
   
  please refer to the [Inputs](#inputs) section.
 
@@ -49,14 +50,16 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.5)]
 | htmloutput | string | `./docs/` | Doxygen-generated HTML files output folder |
 | ghpagesbranch | string | `gh-pages` | Repository branch which is selected as the host of GitHub Pages  |
 | ghpagesdir | string | `./` | GitHub Pages home directory in the GitHub Pages branch |
+| darkmode | boolean | `false` | Switching between [Dark Mode](https://langroodi.github.io/Adaptive-AUTOSAR/) and [Light Mode](https://langroodi.github.io/Async-BSD-Socket-Lib/) |
 
 ```yaml
 # In the case of no checkout action call in the whole build script, following action should be called before executing the doxygenize action
 uses: actions/checkout@v2
-uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.5)]
+uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.6)]
 with:
     doxygenconf: '[Configuration file path including the file name (e.g., ./doc/doxygen.conf)]'
     htmloutput: '[HTML output folder (e.g., ./doc/html/)]'
     ghpagesbranch: '[GitHub Pages branch name'(e.g., master)]'
     ghpagesdir: '[GitHub Pages directory path (e.g., ./docs/)]'
+    darkmode: '[true to enable Doxygen dark theme; otherwise use Doxygen default theme]'
 ```

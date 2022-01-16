@@ -10,21 +10,21 @@ InstallDependencies () {
 ConfigureDarkTheme () {
     HTMLOUTPUT=$1
     RAWCONTENTURL="https://raw.githubusercontent.com/langroodi/doxygenize"
-    CONTENTTAG="33512f53bd403d83806bb133016bb055f7953a81"
+    RAWCONTENTTAG="v1.6"
 
     # Replace general doxygen style sheet
     LIGHTDOGYGENCSS="$HTMLOUTPUT/doxygen.css"
-    DARKDOXYGENCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/doxygen.css"
+    DARKDOXYGENCSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/doxygen.css"
     wget -O "$LIGHTDOGYGENCSS" "$DARKDOXYGENCSS" || exit 1
 
     # Replace general navigation tree style sheet
     LIGHTNAVTREECSS="$HTMLOUTPUT/navtree.css"
-    DARKNAVTREECSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/navtree.css"
+    DARKNAVTREECSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/navtree.css"
     wget -O "$LIGHTNAVTREECSS" "$DARKNAVTREECSS" || exit 1
 
     # Replace general search menu style sheet
     LIGHTSEARCHCSS="$HTMLOUTPUT/search/search.css"
-    DARKSEARCHCSS="$RAWCONTENTURL/$CONTENTTAG/stylesheet/search.css"
+    DARKSEARCHCSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/search.css"
     wget -O "$LIGHTSEARCHCSS" "$DARKSEARCHCSS" || exit 1
 }
 

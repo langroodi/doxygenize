@@ -10,7 +10,7 @@ InstallDependencies () {
 ConfigureDarkTheme () {
     HTMLOUTPUT=$1
     RAWCONTENTURL="https://raw.githubusercontent.com/langroodi/doxygenize"
-    RAWCONTENTTAG="v1.6"
+    RAWCONTENTTAG="v1"
 
     # Replace general doxygen style sheet
     LIGHTDOGYGENCSS="$HTMLOUTPUT/doxygen.css"

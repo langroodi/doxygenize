@@ -31,7 +31,7 @@ HTML_OUTPUT            = ./docs # Relative path to root of your repository
 - Call `action/checkoutv2` in the workflow to clone the repository;
 - Add following step to your respository workflow script:
 ```yaml
-uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.6)]
+uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1)]
 ```
 - In case of different:
   - Doxygen configuration file name and/or path;
@@ -55,7 +55,7 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1.6)]
 ```yaml
 # In the case of no checkout action call in the whole build script, following action should be called before executing the doxygenize action
 uses: actions/checkout@v2
-uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1.6)]
+uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1)]
 with:
     doxygenconf: '[Configuration file path including the file name (e.g., ./doc/doxygen.conf)]'
     htmloutput: '[HTML output folder (e.g., ./doc/html/)]'

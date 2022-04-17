@@ -32,6 +32,9 @@ ConfigureGitUser () {
     # Set Git user configuration
     git config user.name github-actions[bot]
     git config user.email github-actions[bot]@users.noreply.github.com
+    
+    # Add shared GitHub Workspace as exception due to CVE-2022-24765
+    git config --global --add safe.directory /github/workspace
 }
 
 DisableJekyll () {

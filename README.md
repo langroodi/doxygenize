@@ -63,3 +63,11 @@ with:
     ghpagesdir: '[GitHub Pages directory path (e.g., ./docs/)]'
     darkmode: '[true to enable Doxygen dark theme; otherwise use Doxygen default theme]'
 ```
+
+## Semantic versioning
+
+Following is the latest doxygenize version:
+
+| Release version | Docker image | Tag aliases |
+| --------------- | ------------ | ----------  |
+| v1.6.2 | Alpine 3.15.4 | v1, v1.6 |

@@ -95,7 +95,7 @@ CommitChanges () {
     git add --force "$DESTINATIONDIR"
     
     # Commit all the changed to the the GitHub Pages branch
-    git commit -m "Auto commit"
+    git commit -m "Auto commit" || exit 1
     
     # Push the changes to the remote GitHub Pages branch
     git push

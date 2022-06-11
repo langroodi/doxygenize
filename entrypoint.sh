@@ -94,7 +94,7 @@ CommitChanges () {
     # Add only the destination directory
     git add --force "$DESTINATIONDIR"
     
-    #check if there are any changes that are staged but not committed
+    # Check if there are any changes that are staged but not committed
     if (! git diff --cached --exit-code --shortstat) 
     then
    	
@@ -105,9 +105,7 @@ CommitChanges () {
     	git push
     else
     	echo "There is no change in the documentation"
-    	exit 0
     fi
- 
 }
 
 # Fetch the first argument (Doxygen configuration file path)

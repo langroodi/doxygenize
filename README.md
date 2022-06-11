@@ -70,4 +70,4 @@ Following is the latest doxygenize version:
 
 | Release version | Docker image | Tag aliases |
 | --------------- | ------------ | ----------  |
-| v1.6.2 | Alpine 3.15.4 | v1, v1.6 |
+| v1.6.3 | Alpine 3.15.4 | v1, v1.6 |

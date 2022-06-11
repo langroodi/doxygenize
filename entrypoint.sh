@@ -104,6 +104,7 @@ CommitChanges () {
 	# Push the changes to the remote GitHub Pages branch
     	git push
     else
+    	echo "There is no change in the documentation"
     	exit 0
     fi
  

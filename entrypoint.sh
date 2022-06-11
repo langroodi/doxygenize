@@ -94,11 +94,20 @@ CommitChanges () {
     # Add only the destination directory
     git add --force "$DESTINATIONDIR"
     
-    # Commit all the changed to the the GitHub Pages branch
-    git commit -m "Auto commit" || exit 1
-    
-    # Push the changes to the remote GitHub Pages branch
-    git push
+    #check if there are any changes that are staged but not committed
+    if (! git diff --cached --exit-code --shortstat) 
+    then
+   	
+	# Commit all the changed to the the GitHub Pages branch
+    	git commit -m "Auto commit" || exit 1
+   	
+	# Push the changes to the remote GitHub Pages branch
+    	git push
+    else
+    	echo "There is no change in the documentation"
+    	exit 0
+    fi
+ 
 }
 
 # Fetch the first argument (Doxygen configuration file path)

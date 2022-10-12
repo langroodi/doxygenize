@@ -7,6 +7,28 @@ InstallDependencies () {
     apk add doxygen git openssh graphviz ttf-freefont
 }
 
+ConfigureCustomHeader () {
+    DOXYGENCONF=$1
+    CUSTOMHEADER=$2
+    TEMPDESTINATION="/tmp/custom_header.html"
+    HTMLHEADER="HTML_HEADER"
+
+    # Exit with error
+    # if the 'HTML_HEADER' configuration entry already exists in the Doxygen configuration file
+    if (grep -q "$HTMLHEADER" "$DOXYGENCONF")
+    then
+        echo "HTML header configuration entry already exists in the Doxygen configuration file"
+        exit 1
+    fi
+
+    # Download the custom header file to the temp directory
+    wget -O "$TEMPDESTINATION" "$CUSTOMHEADER" || exit 1
+
+    # Append the 'HTML_HEADER' configuration entry to the Doxygen configuration file
+    CONFIGURATIONENTRY="\n$HTMLHEADER=$TEMPDESTINATION"
+    echo -e "$CONFIGURATIONENTRY" >> "$DOXYGENCONF"
+}
+
 ConfigureDarkTheme () {
     HTMLOUTPUT=$1
     RAWCONTENTURL="https://raw.githubusercontent.com/langroodi/doxygenize"
@@ -130,7 +152,16 @@ GHPAGESDIR=$4
 # Fetch the fifth argument (Toggle dark mode)
 DARKMODE=$5
 
+# Fetch the sixth argument (Custom Doxygen pages header HTML file URL)
+CUSTOMHEADER=$6
+
 InstallDependencies
+
+# Customize Doxygen HTML pages header
+# if the custom header has been set
+if [ "$CUSTOMHEADER" != "" ]; then
+    ConfigureCustomHeader "$DOXYGENCONF" "$CUSTOMHEADER"
+fi
 
 # Try to generate code documentation
 # Exit with error if the document generation failed

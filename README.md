@@ -51,7 +51,7 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1)]
 | ghpagesbranch | string | `gh-pages` | Repository branch which is selected as the host of GitHub Pages  |
 | ghpagesdir | string | `./` | GitHub Pages home directory in the GitHub Pages branch |
 | darkmode | boolean | `false` | Switching between [Dark Mode](https://langroodi.github.io/Adaptive-AUTOSAR/) and [Light Mode](https://langroodi.github.io/Async-BSD-Socket-Lib/) |
-| customheader | string | `'https://raw.githubusercontent.com/langroodi/doxygenize/v1/header/freejadi.html'` | Customized Doxygen HTML pages header file URL |
+| customheader | string | empty | Customized Doxygen HTML pages header file URL |
 ```yaml
 # In the case of no checkout action call in the whole build script, following action should be called before executing the doxygenize action
 uses: actions/checkout@v3
@@ -59,9 +59,10 @@ uses: langroodi/doxygenize@[version/tag/commit hash (e.g., v1)]
 with:
     doxygenconf: '[Configuration file path including the file name (e.g., ./doc/doxygen.conf)]'
     htmloutput: '[HTML output folder (e.g., ./doc/html/)]'
-    ghpagesbranch: '[GitHub Pages branch name'(e.g., master)]'
+    ghpagesbranch: '[GitHub Pages branch name (e.g., master)]'
     ghpagesdir: '[GitHub Pages directory path (e.g., ./docs/)]'
     darkmode: '[true to enable Doxygen dark theme; otherwise use Doxygen default theme]'
+    customheader: '[HTML header file URL (e.g., https://raw.githubusercontent.com/langroodi/doxygenize/v1/header/freejadi.html)]'
 ```
 
 ## Semantic versioning

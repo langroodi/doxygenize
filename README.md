@@ -62,7 +62,7 @@ with:
     ghpagesbranch: '[GitHub Pages branch name (e.g., master)]'
     ghpagesdir: '[GitHub Pages directory path (e.g., ./docs/)]'
     darkmode: '[true to enable Doxygen dark theme; otherwise use Doxygen default theme]'
-    customheader: '[HTML header file URL (e.g., https://raw.githubusercontent.com/langroodi/doxygenize/v1/header/freejadi.html)]'
+    customheader: '[HTML header file URL (e.g., https://raw.githubusercontent.com/langroodi/doxygenize/master/header/woman_life_freedom.html)]'
 ```
 
 ## Semantic versioning

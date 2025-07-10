@@ -163,6 +163,9 @@ if [ "$CUSTOMHEADER" != "" ]; then
     ConfigureCustomHeader "$DOXYGENCONF" "$CUSTOMHEADER"
 fi
 
+# Create the HTML output path (e.g. site/html), as Doxygen does not support creating multiple parent directories
+mkdir -p "$HTMLOUTPUT"
+
 # Try to generate code documentation
 # Exit with error if the document generation failed
 doxygen "$DOXYGENCONF" || exit 1

@@ -29,25 +29,14 @@ ConfigureCustomHeader () {
     echo -e "$CONFIGURATIONENTRY" >> "$DOXYGENCONF"
 }
 
-ConfigureDarkTheme () {
-    HTMLOUTPUT=$1
-    RAWCONTENTURL="https://raw.githubusercontent.com/langroodi/doxygenize"
-    RAWCONTENTTAG="v1"
+ConfigureDarkMode () {
+    DOXYGENCONF=$1
+    DARKSTYLE="DARK"
+    HTMLCOLORSTYLE="HTML_COLORSTYLE"
 
-    # Replace general doxygen style sheet
-    LIGHTDOGYGENCSS="$HTMLOUTPUT/doxygen.css"
-    DARKDOXYGENCSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/doxygen.css"
-    wget -O "$LIGHTDOGYGENCSS" "$DARKDOXYGENCSS" || exit 1
-
-    # Replace general navigation tree style sheet
-    LIGHTNAVTREECSS="$HTMLOUTPUT/navtree.css"
-    DARKNAVTREECSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/navtree.css"
-    wget -O "$LIGHTNAVTREECSS" "$DARKNAVTREECSS" || exit 1
-
-    # Replace general search menu style sheet
-    LIGHTSEARCHCSS="$HTMLOUTPUT/search/search.css"
-    DARKSEARCHCSS="$RAWCONTENTURL/$RAWCONTENTTAG/stylesheet/search.css"
-    wget -O "$LIGHTSEARCHCSS" "$DARKSEARCHCSS" || exit 1
+    # Append the 'HTML_COLORSTYLE' configuration entry to the Doxygen configuration file
+    CONFIGURATIONENTRY="\n$HTMLCOLORSTYLE=$DARKSTYLE"
+    echo -e "$CONFIGURATIONENTRY" >> "$DOXYGENCONF"
 }
 
 ConfigureGitUser () {
@@ -175,10 +164,10 @@ else
     exit 1
 fi
 
-# Replace dark theme style sheet CSS files
+# Force the dark mode as the HTML color style
 # if dark mode is enabled as action input
 if [ $DARKMODE = true ]; then
-    ConfigureDarkTheme "$HTMLOUTPUT"
+    ConfigureDarkMode "$DOXYGENCONF"
 fi
 
 ConfigureGitUser

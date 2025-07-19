@@ -50,7 +50,7 @@ uses: langroodi/doxygenize@[version/tag/commit hash (i.e., v1)]
 | htmloutput | string | `./docs/` | Doxygen-generated HTML files output folder |
 | ghpagesbranch | string | `gh-pages` | Repository branch which is selected as the host of GitHub Pages  |
 | ghpagesdir | string | `./` | GitHub Pages home directory in the GitHub Pages branch |
-| darkmode | boolean | `false` | Switching between [Dark Mode](https://langroodi.github.io/Adaptive-AUTOSAR/) and [Light Mode](https://langroodi.github.io/Async-BSD-Socket-Lib/) |
+| darkmode | boolean | `false` | Switching between [Dark Mode](https://langroodi.github.io/Adaptive-AUTOSAR/) and [Auto-Light Mode](https://langroodi.github.io/Async-BSD-Socket-Lib/) |
 | customheader | string | empty | Customized Doxygen HTML pages header file URL |
 ```yaml
 # In the case of no checkout action call in the whole build script, following action should be called before executing the doxygenize action

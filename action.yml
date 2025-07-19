@@ -21,7 +21,7 @@ inputs:
     required: true
     default: './'
   darkmode:
-    description: 'Toggle dark mode CSS'
+    description: 'Force dark mode HTML color style'
     required: false
     default: false
   customheader:
